@@ -13,11 +13,12 @@ import tempfile
 
 BASE_URL = "https://www.jdsports.de/frauen/frauenkleidung/"
 JSON_FILE = "jdsports_products.json"
-BATCH_SIZE = 50  # сохранять каждые 10 товаров
+BATCH_SIZE = 100  # сохранять каждые 10 товаров
 MAX_PRODUCTS_PER_CATEGORY = 100  # максимум товаров с категории
 
 # Настройки Selenium
 options = Options()
+options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 # Add argument to use a temporary user data directory
 options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
@@ -67,21 +68,15 @@ def get_products_from_page(category_name):
     for item in items:
         title_tag = item.select_one("span.itemTitle a")
         price_tag = item.select_one("span.pri")
+        img_tag = item.select_one("img.thumbnail")
         if not title_tag:
             continue
-
-        # берём картинку из data-src, если она есть, иначе src
-        img_tag = item.select_one("img.thumbnail")
-        img_url = ""
-        if img_tag:
-            img_url = img_tag.get("data-src") or img_tag.get("src")
-
         href = title_tag.get("href", "")
         full_url = "https://www.jdsports.de" + href
         products.append({
             "title": title_tag.text.strip(),
             "price": price_tag.text.strip() if price_tag else "",
-            "img_url": img_url,
+            "img_url": img_tag['src'] if img_tag else "",
             "ref_item": full_url,
             "category": category_name,
             "sex": 1,
