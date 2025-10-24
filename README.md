@@ -1,4 +1,4 @@
-# Zalando 
+# Zalando | A 
 # Nike
 # Adidas 
 # H&M
@@ -7,7 +7,7 @@
 # NewYorker
 # C&A
 # TK max
-# JD Sports
+# JD Sports | S
 # T&H 
 # VERA MODA 
 # Mustang 
