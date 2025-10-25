@@ -18,7 +18,6 @@ Die folgenden Shops werden derzeit unterstützt und gescraped:
 Die gesammelten Produktdaten haben die folgende Struktur:
 
 *   **title**: Titel des Produkts
-*   **description**: Beschreibung des Produkts
 *   **category**: Produktkategorie
 *   **size**: Verfügbare Größen
 *   **color**: Farbe des Produkts
